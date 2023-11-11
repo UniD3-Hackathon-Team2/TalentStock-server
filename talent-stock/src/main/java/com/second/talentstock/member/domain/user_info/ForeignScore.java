@@ -21,7 +21,6 @@ public class ForeignScore {
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
-    @Column(unique = true)
     private Member member;
 
     private String score;
