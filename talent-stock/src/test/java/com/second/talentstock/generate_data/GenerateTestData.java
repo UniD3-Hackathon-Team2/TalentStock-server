@@ -64,7 +64,7 @@ public class GenerateTestData {
                 .email(email)
                 .university(university)
                 .department(department)
-                .grade(grade)
+                .grade(grade+"")
                 .majorScore(majorScore)
                 .totalScore(totalScore)
                 .shortIntroduce(shortIntroduce)
