@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/offer/")
+@RequestMapping("/api/v1/offer")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class OfferController {
     private final OfferService offerService;

@@ -43,6 +43,7 @@ public enum BaseResponseStatus {
      */
 
     // user (2000 ~ 2199)
+    NOT_ALLOW_MODIFY_USER(false, 2600, "해당 유저를 수정할 권한이 없습니다. 로그인 정보를 확인해주세요"),
 
     // offer (3200 ~ 3299)
 

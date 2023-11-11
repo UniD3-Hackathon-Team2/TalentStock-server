@@ -4,11 +4,13 @@ import jakarta.persistence.Entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = PROTECTED)
 public class CompanyMember extends Member {
 
