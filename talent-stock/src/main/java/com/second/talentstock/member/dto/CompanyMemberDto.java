@@ -8,18 +8,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CompanyMemberDto {
 
-    private String logoImgUrl;
-    private String explanation;
-    private Boolean isCompulsoryWork;
+    private int scholarship;
+    private String position;
     private int mustWorkingYear;
-    private String jobTask;
 
     @Builder
-    public CompanyMemberDto(String logoImgUrl, String explanation, Boolean isCompulsoryWork, int mustWorkingYear, String jobTask) {
-        this.logoImgUrl = logoImgUrl;
-        this.explanation = explanation;
-        this.isCompulsoryWork = isCompulsoryWork;
+    public CompanyMemberDto(int scholarship, String position, int mustWorkingYear) {
+        this.scholarship = scholarship;
+        this.position = position;
         this.mustWorkingYear = mustWorkingYear;
-        this.jobTask = jobTask;
     }
 }

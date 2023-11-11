@@ -165,11 +165,9 @@ public class MemberService {
         CompanyMember companyMember = companyMemberRepository.findById(id)
                 .orElseThrow(() -> new BaseException(INVALID_USER_ID));
         return CompanyMemberDto.builder()
-                .logoImgUrl(companyMember.getLogoImgUrl())
-                .explanation(companyMember.getExplanation())
-                .isCompulsoryWork(companyMember.getIsCompulsoryWork())
+                .scholarship(companyMember.getScholarship())
+                .position(companyMember.getPosition())
                 .mustWorkingYear(companyMember.getMustWorkingYear())
-                .jobTask(companyMember.getJobTask())
                 .build();
     }
 }

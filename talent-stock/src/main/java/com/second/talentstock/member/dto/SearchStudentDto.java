@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SearchStudentDto {
+    private String memberId;
     private String name;
     private String university;
     private String department;
@@ -17,6 +18,7 @@ public class SearchStudentDto {
     private String interest;
 
     public SearchStudentDto(StudentMember member) {
+        this.memberId = member.getId() + "";
         this.name = member.getName();
         this.university = member.getUniversity();
         this.department = member.getDepartment();

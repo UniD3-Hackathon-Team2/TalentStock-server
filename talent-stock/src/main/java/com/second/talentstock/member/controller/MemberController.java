@@ -1,17 +1,12 @@
 package com.second.talentstock.member.controller;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.second.talentstock.common.BaseException;
 import com.second.talentstock.common.BaseResponse;
+import com.second.talentstock.common.BaseResponseStatus;
 import com.second.talentstock.member.dto.LoginMemberReqDto;
 import com.second.talentstock.member.dto.SearchStudentReqDto;
 import com.second.talentstock.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import com.second.talentstock.common.BaseResponseStatus;
-import com.second.talentstock.member.service.MemberService;
-import lombok.RequiredArgsConstructor;
-import org.hibernate.mapping.Map;
 import org.springframework.web.bind.annotation.*;
 
 import static com.second.talentstock.member.domain.MemberType.COMPANY;
@@ -44,18 +39,16 @@ public class MemberController {
         }
     }
 
-          
+
     @GetMapping("/profile")
     @ResponseBody
     public BaseResponse<?> profile(@RequestParam("id") Long id) {
         try {
             if (memberService.judgeMemberType(id) == STUDENT) {
                 return new BaseResponse(memberService.showStudentProfile(id));
-            }
-            else if (memberService.judgeMemberType(id) == COMPANY){
+            } else if (memberService.judgeMemberType(id) == COMPANY) {
                 return new BaseResponse(memberService.showCompanyProfile(id));
-            }
-            else {
+            } else {
                 return new BaseResponse(BaseResponseStatus.INVALID_USER_ID);
             }
         } catch (BaseException e) {
