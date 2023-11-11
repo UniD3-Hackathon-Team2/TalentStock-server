@@ -26,12 +26,14 @@ public class CompanyReceivedOfferResDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class CompanyOfferDto {
+        private Long companyId;
         private String companyName;
         private int scholarship;
         private String position;
         private int mustWorkingYear;
 
         public CompanyOfferDto(CompanyMember companyMember) {
+            this.companyId = companyMember.getId();
             this.scholarship = companyMember.getScholarship();
             this.companyName = companyMember.getName();
             this.position = companyMember.getPosition();

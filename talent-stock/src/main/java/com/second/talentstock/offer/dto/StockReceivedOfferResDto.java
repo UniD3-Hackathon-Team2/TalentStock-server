@@ -27,10 +27,12 @@ public class StockReceivedOfferResDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class InvestorOfferDto {
+        private Long investorId;
         private String investorName;
         private int scholarship;
 
         public InvestorOfferDto(InvestorMember investorMember) {
+            this.investorId = investorMember.getId();
             this.investorName = investorMember.getName();
             this.scholarship = investorMember.getScholarship();
         }
