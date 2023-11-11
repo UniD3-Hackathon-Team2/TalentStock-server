@@ -110,6 +110,7 @@ public class MemberService {
                 .memberType(studentMember.getMemberType())
                 .name(studentMember.getName())
                 .email(studentMember.getEmail())
+                .university(studentMember.getUniversity())
                 .department(studentMember.getDepartment())
                 .grade(Integer.parseInt(studentMember.getGrade()))
                 .majorScore(studentMember.getMajorScore())
