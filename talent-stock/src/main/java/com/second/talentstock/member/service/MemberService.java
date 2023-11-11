@@ -2,6 +2,7 @@ package com.second.talentstock.member.service;
 
 import com.second.talentstock.common.BaseException;
 import com.second.talentstock.member.domain.Member;
+import com.second.talentstock.member.dto.LoginMemberResDto;
 import com.second.talentstock.member.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +21,13 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    public Long findByIdAndPw(String id, String pw) throws BaseException {
-        return memberRepository.findByLoginIDAndLoginPW(id, pw)
-                .orElseThrow(() -> new BaseException(INVALID_LOGIN_INFO))
-                .getId();
+    public LoginMemberResDto findByIdAndPw(String id, String pw) throws BaseException {
+        Member member = memberRepository.findByLoginIDAndLoginPW(id, pw)
+                .orElseThrow(() -> new BaseException(INVALID_LOGIN_INFO));
+        return LoginMemberResDto.builder()
+                .memberType(member.getUserType())
+                .memberId(member.getId())
+                .build();
     }
 
     public Member findById(Long id) throws BaseException {
