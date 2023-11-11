@@ -3,6 +3,7 @@ package com.second.talentstock.interestTag.domain;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,4 +27,10 @@ public class InterestTag {
     @ManyToOne
     @JoinColumn(name="top_category", nullable = true)
     private InterestTag topCategory;
+
+    @Builder
+    public InterestTag(String tagName, InterestTag topCategory) {
+        this.tagName = tagName;
+        this.topCategory = topCategory;
+    }
 }

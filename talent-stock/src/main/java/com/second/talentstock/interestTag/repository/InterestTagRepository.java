@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface InterestTagReposiroty extends JpaRepository<InterestTag, Long> {
+public interface InterestTagRepository extends JpaRepository<InterestTag, Long> {
 
-    Optional<InterestTag> findByTopCategory(Long id);
+    Optional<InterestTag> findByTopCategory(InterestTag topCategory);
 }

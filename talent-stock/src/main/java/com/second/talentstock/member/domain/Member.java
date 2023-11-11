@@ -4,6 +4,7 @@ package com.second.talentstock.member.domain;
 import com.second.talentstock.common.BaseEntity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -29,9 +30,17 @@ public class Member extends BaseEntity {
     private String loginPW;
 
     @Enumerated(STRING)
-    private MemberType userType;
+    private MemberType memberType;
 
     private String name;
 
     private String email;
+
+    protected Member(String loginID, String loginPW, MemberType memberType, String name, String email) {
+        this.loginID = loginID;
+        this.loginPW = loginPW;
+        this.memberType = memberType;
+        this.name = name;
+        this.email = email;
+    }
 }

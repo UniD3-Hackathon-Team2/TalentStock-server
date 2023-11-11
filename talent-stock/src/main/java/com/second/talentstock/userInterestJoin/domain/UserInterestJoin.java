@@ -3,6 +3,7 @@ package com.second.talentstock.userInterestJoin.domain;
 import com.second.talentstock.interestTag.domain.InterestTag;
 import com.second.talentstock.member.domain.Member;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,4 +29,9 @@ public class UserInterestJoin {
     @JoinColumn(name="interest_id")
     private InterestTag interestTag;
 
+    @Builder
+    public UserInterestJoin(Member member, InterestTag interestTag) {
+        this.member = member;
+        this.interestTag = interestTag;
+    }
 }
