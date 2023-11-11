@@ -5,6 +5,7 @@ import com.second.talentstock.common.BaseException;
 import com.second.talentstock.member.domain.Member;
 import com.second.talentstock.member.repository.MemberRepository;
 import com.second.talentstock.offer.domain.Offer;
+import com.second.talentstock.offer.dto.MakeOfferReqDto;
 import com.second.talentstock.offer.repository.OfferRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,20 @@ public class OfferService {
 
     @Transactional
     public void save(Offer offer) {
+        offerRepository.save(offer);
+    }
+
+    @Transactional
+    public void makeOffer(Long memberId, MakeOfferReqDto reqDto) throws BaseException {
+        Member sender = findMemberById(memberId);
+        Member receiver = findMemberById(reqDto.getReceiverId());
+
+        Offer offer = Offer.builder()
+                .sender(sender)
+                .receiver(receiver)
+                .offerType(reqDto.getOfferType())
+                .build();
+
         offerRepository.save(offer);
     }
 
