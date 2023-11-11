@@ -1,6 +1,6 @@
-package com.second.talentstock.Member.repository;
+package com.second.talentstock.member.repository;
 
-import com.second.talentstock.Member.domain.Member;
+import com.second.talentstock.member.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

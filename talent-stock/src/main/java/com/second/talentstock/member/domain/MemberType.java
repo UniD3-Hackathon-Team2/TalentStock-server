@@ -1,4 +1,4 @@
-package com.second.talentstock.Member.domain;
+package com.second.talentstock.member.domain;
 
 public enum MemberType {
     STUDENT, INVESTOR, COMPANY

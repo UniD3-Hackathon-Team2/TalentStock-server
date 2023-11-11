@@ -1,4 +1,4 @@
-package com.second.talentstock.Member.dto;
+package com.second.talentstock.member.dto;
 
 import lombok.Data;
 

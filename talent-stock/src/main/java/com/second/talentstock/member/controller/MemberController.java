@@ -1,6 +1,6 @@
-package com.second.talentstock.Member.controller;
+package com.second.talentstock.member.controller;
 
-import com.second.talentstock.Member.service.MemberService;
+import com.second.talentstock.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

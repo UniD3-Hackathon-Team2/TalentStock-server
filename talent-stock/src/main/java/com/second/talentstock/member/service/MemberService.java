@@ -1,7 +1,7 @@
-package com.second.talentstock.Member.service;
+package com.second.talentstock.member.service;
 
-import com.second.talentstock.Member.domain.Member;
-import com.second.talentstock.Member.repository.MemberRepository;
+import com.second.talentstock.member.domain.Member;
+import com.second.talentstock.member.repository.MemberRepository;
 import com.second.talentstock.common.BaseException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
