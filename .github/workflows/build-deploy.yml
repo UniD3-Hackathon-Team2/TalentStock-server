@@ -10,7 +10,7 @@ env:
   PROJECT_NAME: talentstock
   BUCKET_NAME: talentstock-cicd-bucket
   CODE_DEPLOY_APP_NAME: talentstock_cicd
-  DEPLOYMENT_GROUP_NAME: talentstock-instance
+  DEPLOYMENT_GROUP_NAME: talentstock_instance
 
 jobs:
   deploy:
