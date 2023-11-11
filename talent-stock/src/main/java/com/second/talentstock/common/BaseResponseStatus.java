@@ -25,10 +25,17 @@ public enum BaseResponseStatus {
 
     // offer (2200 ~ 2299)
 
-    INVALID_RECIEVER_ID(false, 2200, "유효하지 않은 수신자(Receiver) 유저 ID 값 입니다."),
-    INVALID_SENDER_ID(false, 2201, "유효하지 않은 송신자(Sender) 유저 ID 값 입니다."),
+    INVALID_OFFER_ID(false, 2200, "유효하지 않은 Offer ID 값 입니다."),
+    INVALID_RECIEVER_ID(false, 2201, "유효하지 않은 수신자(Receiver) 유저 ID 값 입니다."),
+    INVALID_SENDER_ID(false, 2202, "유효하지 않은 송신자(Sender) 유저 ID 값 입니다."),
 
     // interest (2300 ~ 2399)
+    INVALID_INTEREST_TAG_ID(false, 2300, "유효하지 않은 관심 분야 태그 ID입니다"),
+    INVALID_TOP_CATEGORY_TAG_ID(false, 2301, "유효하지 않은 상위 관심 분야 태그 ID입니다"),
+
+    INVALID_USER_INTEREST_JOIN_ID(false, 2350, "유효하지 않은 유저-관심 분야 관계 태그 ID입니다"),
+    INVALID_USER_INTEREST_JOIN_USER_ID(false, 2351, "유효하지 않은 유저-관심 분야 관계 유저 ID입니다"),
+    INVALID_USER_INTEREST_JOIN_INTEREST_ID(false, 2352, "유효하지 않은 유저-관심 분야 관계 관심분야 ID입니다"),
 
 
     /**

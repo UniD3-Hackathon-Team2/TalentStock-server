@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_LOGIN_INFO;
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_USER_ID;
 
@@ -20,6 +21,7 @@ public class MemberService {
     public void save(Member member) {
         memberRepository.save(member);
     }
+
 
     public LoginMemberResDto findByIdAndPw(String id, String pw) throws BaseException {
         Member member = memberRepository.findByLoginIDAndLoginPW(id, pw)

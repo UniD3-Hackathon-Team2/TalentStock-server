@@ -17,8 +17,13 @@ public class OfferService {
     private final OfferRepository offerRepository;
 
     @Transactional
-    public void Save(Offer offer) {
+    public void save(Offer offer) {
         offerRepository.save(offer);
+    }
+
+    public Offer findById(Long id) throws BaseException {
+        return offerRepository.findById(id)
+                .orElseThrow(() -> new BaseException(INVALID_OFFER_ID));
     }
 
     public Offer findBySenderId(Long id) throws BaseException {
