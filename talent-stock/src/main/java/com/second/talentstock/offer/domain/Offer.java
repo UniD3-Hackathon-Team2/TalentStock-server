@@ -29,11 +29,11 @@ public class Offer extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name="receiver_id")
-    private Member receiverId;
+    private Member receiver;
 
     @ManyToOne
     @JoinColumn(name="sender_id")
-    private Member senderId;
+    private Member sender;
 
     private String title;
 
