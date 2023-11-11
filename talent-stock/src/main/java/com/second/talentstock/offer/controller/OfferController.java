@@ -47,6 +47,15 @@ public class OfferController {
         }
     }
 
+    @GetMapping("/company/{companyId}")
+    public BaseResponse<?> getSendingOffer(@PathVariable("companyId") Long companyMemberId) {
+        try {
+            return new BaseResponse<>(offerService.getSendingOffer(companyMemberId));
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
+
     @PatchMapping("/{offerId}")
     public BaseResponse<?> grantOffer(@RequestHeader("Authorization") Long memberId,
                                       @PathVariable("offerId") Long offerId) {
