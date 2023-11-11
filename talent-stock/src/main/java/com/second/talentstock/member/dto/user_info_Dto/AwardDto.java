@@ -15,8 +15,6 @@ import static jakarta.persistence.FetchType.LAZY;
 @NoArgsConstructor
 public class AwardDto {
     private Long id;
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "member_id")
     private Member member;
     private String title;
     private String content;

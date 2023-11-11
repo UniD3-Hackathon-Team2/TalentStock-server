@@ -16,8 +16,6 @@ import static jakarta.persistence.FetchType.LAZY;
 public class ForeignScoreDto {
 
     private Long id;
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "member_id")
     private Member member;
     private String score;
     private String type;

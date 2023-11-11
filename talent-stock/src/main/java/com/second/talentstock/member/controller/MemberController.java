@@ -42,23 +42,22 @@ public class MemberController {
             return new BaseResponse<>(e.getStatus());
         }
     }
-
           
     @GetMapping("/profile")
     @ResponseBody
     public BaseResponse<?> profile(@RequestParam("id") Long id) {
         try {
             if (memberService.judgeMemberType(id) == STUDENT) {
-                return new BaseResponse(memberService.showStudentProfile(id));
+                return new BaseResponse<>(memberService.showStudentProfile(id));
             }
             else if (memberService.judgeMemberType(id) == COMPANY){
-                return new BaseResponse(memberService.showCompanyProfile(id));
+                return new BaseResponse<>(memberService.showCompanyProfile(id));
             }
             else {
-                return new BaseResponse(BaseResponseStatus.INVALID_USER_ID);
+                return new BaseResponse<>(BaseResponseStatus.INVALID_USER_ID);
             }
         } catch (BaseException e) {
-            return new BaseResponse(e.getStatus());
+            return new BaseResponse<>(e.getStatus());
 
         }
     }

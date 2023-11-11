@@ -1,5 +1,6 @@
 package com.second.talentstock.member.dto;
 
+import com.second.talentstock.member.domain.MemberType;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,18 +9,29 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CompanyMemberDto {
 
-    private String logoImgUrl;
+    private MemberType memberType;
+    private String name;
+    private String email;
+
+
     private String explanation;
     private Boolean isCompulsoryWork;
     private int mustWorkingYear;
-    private String jobTask;
+    private String positionNeed;
+    private String positionExplanation;
+    private int scholarship;
+
 
     @Builder
-    public CompanyMemberDto(String logoImgUrl, String explanation, Boolean isCompulsoryWork, int mustWorkingYear, String jobTask) {
-        this.logoImgUrl = logoImgUrl;
+    public CompanyMemberDto(MemberType memberType, String name, String email, String explanation, Boolean isCompulsoryWork, int mustWorkingYear, String positionNeed, String positionExplanation, int scholarship) {
+        this.memberType = memberType;
+        this.name = name;
+        this.email = email;
         this.explanation = explanation;
         this.isCompulsoryWork = isCompulsoryWork;
         this.mustWorkingYear = mustWorkingYear;
-        this.jobTask = jobTask;
+        this.positionNeed = positionNeed;
+        this.positionExplanation = positionExplanation;
+        this.scholarship = scholarship;
     }
 }

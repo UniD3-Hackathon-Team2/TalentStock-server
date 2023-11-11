@@ -22,11 +22,11 @@ public class UserInterestJoin {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="member")
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name="interest_id")
+    @JoinColumn(name="interestTag")
     private InterestTag interestTag;
 
     @Builder

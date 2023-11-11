@@ -1,15 +1,27 @@
 package com.second.talentstock.member.dto;
 
 
-import com.second.talentstock.member.dto.user_info_Dto.*;
+import com.second.talentstock.interestTag.domain.InterestTag;
+import com.second.talentstock.member.domain.MemberType;
+import com.second.talentstock.member.domain.user_info.*;
+import jakarta.persistence.Enumerated;
 import lombok.*;
 
 import java.util.List;
 
+import static jakarta.persistence.EnumType.STRING;
+
 
 @Data
 @NoArgsConstructor
+@Setter
+@Getter
 public class StudentMemberDto {
+
+    @Enumerated(STRING)
+    private MemberType memberType;
+    private String name;
+    private String email;
 
 
     private String university;
@@ -20,15 +32,21 @@ public class StudentMemberDto {
     private String shortIntroduce;
     private String introduce;
 
-    private List<AwardDto> awardList;
-    private List<CertificateDto> certificateList;
-    private List<ForeignScoreDto> foreignScoreList;
-    private List<GroupActivityDto> groupActivityList;
-    private List<ProjectDto> projectList;
+    private List<Award> awardList;
+    private List<Certificate> certificateList;
+    private List<ForeignScore> foreignScoreList;
+    private List<GroupActivity> groupActivityList;
+    private List<Project> projectList;
+
+
+    private List<InterestTag> interestTagList;
 
 
     @Builder
-    public StudentMemberDto(String university, String department, int grade, float majorScore, float totalScore, String shortIntroduce, String introduce, List<AwardDto> awardList, List<CertificateDto> certificateList, List<ForeignScoreDto> foreignScoreList, List<GroupActivityDto> groupActivityList, List<ProjectDto> projectList) {
+    public StudentMemberDto(MemberType memberType, String name, String email, String university, String department, int grade, float majorScore, float totalScore, String shortIntroduce, String introduce, List<Award> awardList, List<Certificate> certificateList, List<ForeignScore> foreignScoreList, List<GroupActivity> groupActivityList, List<Project> projectList, List<InterestTag> interestTagList) {
+        this.memberType = memberType;
+        this.name = name;
+        this.email = email;
         this.university = university;
         this.department = department;
         this.grade = grade;
@@ -41,5 +59,6 @@ public class StudentMemberDto {
         this.foreignScoreList = foreignScoreList;
         this.groupActivityList = groupActivityList;
         this.projectList = projectList;
+        this.interestTagList = interestTagList;
     }
 }

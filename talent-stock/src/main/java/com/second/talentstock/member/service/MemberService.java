@@ -1,23 +1,22 @@
 package com.second.talentstock.member.service;
 
 import com.second.talentstock.common.BaseException;
+import com.second.talentstock.interestTag.repository.InterestTagRepository;
 import com.second.talentstock.member.domain.CompanyMember;
 import com.second.talentstock.member.domain.Member;
 import com.second.talentstock.member.domain.MemberType;
 import com.second.talentstock.member.domain.StudentMember;
-import com.second.talentstock.member.domain.user_info.*;
 import com.second.talentstock.member.dto.*;
-import com.second.talentstock.member.dto.user_info_Dto.*;
 import com.second.talentstock.member.repository.CompanyMemberRepository;
 import com.second.talentstock.member.repository.MemberRepository;
 import com.second.talentstock.member.repository.StudentMemberRepository;
 import com.second.talentstock.member.repository.user_info_repository.*;
+import com.second.talentstock.userInterestJoin.repository.UserInterestJoinRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_LOGIN_INFO;
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_USER_ID;
@@ -34,6 +33,9 @@ public class MemberService {
     private final ForeignScoreRepository foreignScoreRepository;
     private final GroupActivityRepository groupActivityRepository;
     private final ProjectRepository projectRepository;
+
+    private final InterestTagRepository interestTagRepository;
+    private final UserInterestJoinRepository userInterestJoinRepository;
 
     @Transactional
     public void save(Member member) {
@@ -94,70 +96,22 @@ public class MemberService {
         StudentMember studentMember = studentMemberRepository.findById(id)
                 .orElseThrow(() -> new BaseException(INVALID_USER_ID));
 
-
-        Optional<Award> award = awardRepository.findById(id);
-        Optional<Certificate> certificate = certificateRepository.findById(id);
-        Optional<ForeignScore> foreignScore = foreignScoreRepository.findById(id);
-        Optional<GroupActivity> groupActivity = groupActivityRepository.findById(id);
-        Optional<Project> project = projectRepository.findById(id);
-
-
-        AwardDto awardDto = AwardDto.builder()
-                .id(award.get().getId())
-                .member(award.get().getMember())
-                .title(award.get().getTitle())
-                .content(award.get().getContent())
-                .awardDate(award.get().getAwardDate())
-                .build();
-
-        CertificateDto certificateDto = CertificateDto.builder()
-                .id(certificate.get().getId())
-                .member(certificate.get().getMember())
-                .title(certificate.get().getTitle())
-                .content(certificate.get().getContent())
-                .awardDate(certificate.get().getAwardDate())
-                .build();
-
-        ForeignScoreDto foreignScoreDto = ForeignScoreDto.builder()
-                .id(foreignScore.get().getId())
-                .member(foreignScore.get().getMember())
-                .score(foreignScore.get().getScore())
-                .type(foreignScore.get().getType())
-                .acquisitionDate(foreignScore.get().getAcquisitionDate())
-                .build();
-
-        GroupActivityDto groupActivityDto = GroupActivityDto.builder()
-                .id(groupActivity.get().getId())
-                .member(groupActivity.get().getMember())
-                .groupName(groupActivity.get().getGroupName())
-                .role(groupActivity.get().getRole())
-                .startDate(groupActivity.get().getStartDate())
-                .endDate(groupActivity.get().getEndDate())
-                .content(groupActivity.get().getContent())
-                .build();
-
-        ProjectDto projectDto = ProjectDto.builder()
-                .id(project.get().getId())
-                .member(project.get().getMember())
-                .projectName(project.get().getProjectName())
-                .startDate(project.get().getStartDate())
-                .endDate(project.get().getEndDate())
-                .content(project.get().getContent())
-                .role(project.get().getRole())
-                .build();
-
         return StudentMemberDto.builder()
+                .memberType(studentMember.getMemberType())
+                .name(studentMember.getName())
+                .email(studentMember.getEmail())
                 .department(studentMember.getDepartment())
                 .grade(Integer.parseInt(studentMember.getGrade()))
                 .majorScore(studentMember.getMajorScore())
                 .totalScore(studentMember.getTotalScore())
                 .shortIntroduce(studentMember.getShortIntroduce())
                 .introduce(studentMember.getIntroduce())
-                .awardList((List<AwardDto>) awardDto)
-                .certificateList((List<CertificateDto>) certificateDto)
-                .foreignScoreList((List<ForeignScoreDto>) foreignScoreDto)
-                .groupActivityList((List<GroupActivityDto>) groupActivityDto)
-                .projectList((List<ProjectDto>) projectDto)
+                .awardList(awardRepository.findByMember(studentMember))
+                .certificateList(certificateRepository.findByMember(studentMember))
+                .foreignScoreList(foreignScoreRepository.findByMember(studentMember))
+                .groupActivityList(groupActivityRepository.findByMember(studentMember))
+                .projectList(projectRepository.findByMember(studentMember))
+                .interestTagList(interestTagRepository.findByUserInterestJoin(userInterestJoinRepository.findByMemberRaw(studentMember)))
                 .build();
     }
 
@@ -165,11 +119,15 @@ public class MemberService {
         CompanyMember companyMember = companyMemberRepository.findById(id)
                 .orElseThrow(() -> new BaseException(INVALID_USER_ID));
         return CompanyMemberDto.builder()
-                .logoImgUrl(companyMember.getLogoImgUrl())
+                .memberType(companyMember.getMemberType())
+                .name(companyMember.getName())
+                .email(companyMember.getEmail())
                 .explanation(companyMember.getExplanation())
                 .isCompulsoryWork(companyMember.getIsCompulsoryWork())
                 .mustWorkingYear(companyMember.getMustWorkingYear())
-                .jobTask(companyMember.getJobTask())
+                .positionNeed(companyMember.getPositionNeed())
+                .positionExplanation(companyMember.getPositionExplanation())
+                .scholarship(companyMember.getScholarship())
                 .build();
     }
 }
