@@ -2,6 +2,7 @@ package com.second.talentstock.member.controller;
 
 import com.second.talentstock.common.BaseException;
 import com.second.talentstock.common.BaseResponse;
+import com.second.talentstock.common.BaseResponseStatus;
 import com.second.talentstock.member.dto.LoginMemberReqDto;
 import com.second.talentstock.member.dto.ModifyMemberReqDto;
 import com.second.talentstock.member.dto.SearchStudentReqDto;
@@ -69,24 +70,6 @@ public class MemberController {
             }
         } catch (BaseException e) {
             return new BaseResponse<>(e.getStatus());
-        }
-    }
-
-
-    @GetMapping("/profile")
-    @ResponseBody
-    public BaseResponse<?> profile(@RequestParam("id") Long id) {
-        try {
-            if (memberService.judgeMemberType(id) == STUDENT) {
-                return new BaseResponse(memberService.showStudentProfile(id));
-            } else if (memberService.judgeMemberType(id) == COMPANY) {
-                return new BaseResponse(memberService.showCompanyProfile(id));
-            } else {
-                return new BaseResponse(INVALID_USER_ID);
-            }
-        } catch (BaseException e) {
-            return new BaseResponse<>(e.getStatus());
-
         }
     }
 }

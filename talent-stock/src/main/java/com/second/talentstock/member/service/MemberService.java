@@ -144,7 +144,7 @@ public class MemberService {
                 .memberType(companyMember.getMemberType())
                 .name(companyMember.getName())
                 .email(companyMember.getEmail())
-                .explanation(companyMember.getExplanation())
+                .explanation(companyMember.getPositionExplanation())
                 .isCompulsoryWork(companyMember.getIsCompulsoryWork())
                 .mustWorkingYear(companyMember.getMustWorkingYear())
                 .positionNeed(companyMember.getPosition())
