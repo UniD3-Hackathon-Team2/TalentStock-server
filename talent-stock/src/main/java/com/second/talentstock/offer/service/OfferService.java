@@ -1,20 +1,26 @@
 package com.second.talentstock.offer.service;
 
 
+import com.second.talentstock.common.BaseException;
+import com.second.talentstock.member.domain.Member;
+import com.second.talentstock.member.repository.MemberRepository;
 import com.second.talentstock.offer.domain.Offer;
 import com.second.talentstock.offer.repository.OfferRepository;
-import com.second.talentstock.common.BaseException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.second.talentstock.common.BaseResponseStatus.*;
+import java.util.List;
+
+import static com.second.talentstock.common.BaseResponseStatus.INVALID_OFFER_ID;
+import static com.second.talentstock.common.BaseResponseStatus.INVALID_USER_ID;
 
 @Service
 @RequiredArgsConstructor
 public class OfferService {
 
     private final OfferRepository offerRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional
     public void save(Offer offer) {
@@ -26,15 +32,18 @@ public class OfferService {
                 .orElseThrow(() -> new BaseException(INVALID_OFFER_ID));
     }
 
-    public Offer findBySenderId(Long id) throws BaseException {
-        return offerRepository.findBySenderId(id)
-                .orElseThrow(() -> new BaseException(INVALID_SENDER_ID));
+    public List<Offer> findBySenderId(Long id) throws BaseException {
+        Member sender = findMemberById(id);
+        return offerRepository.findBySender(sender);
     }
 
-    public Offer findByReceiverID(Long id) throws BaseException {
-        return offerRepository.findByReceiverId(id)
-                .orElseThrow(() -> new BaseException(INVALID_RECIEVER_ID));
+    public List<Offer> findByReceiverID(Long id) throws BaseException {
+        Member receiver = findMemberById(id);
+        return offerRepository.findByReceiver(receiver);
     }
 
-
+    private Member findMemberById(Long id) throws BaseException {
+        return memberRepository.findById(id)
+                .orElseThrow(() -> new BaseException(INVALID_USER_ID));
+    }
 }

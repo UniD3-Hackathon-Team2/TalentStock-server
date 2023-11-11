@@ -27,7 +27,7 @@ public class MemberService {
         Member member = memberRepository.findByLoginIDAndLoginPW(id, pw)
                 .orElseThrow(() -> new BaseException(INVALID_LOGIN_INFO));
         return LoginMemberResDto.builder()
-                .memberType(member.getUserType())
+                .memberType(member.getMemberType())
                 .memberId(member.getId())
                 .build();
     }
