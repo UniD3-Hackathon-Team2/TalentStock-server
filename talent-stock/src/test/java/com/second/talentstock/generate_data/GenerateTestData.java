@@ -3,13 +3,21 @@ package com.second.talentstock.generate_data;
 import com.second.talentstock.interestTag.service.InterestTagService;
 import com.second.talentstock.member.domain.CompanyMember;
 import com.second.talentstock.member.domain.MemberType;
+import com.second.talentstock.member.domain.StudentMember;
+import com.second.talentstock.member.domain.user_info.Award;
+import com.second.talentstock.member.repository.user_info_repository.AwardRepository;
 import com.second.talentstock.member.service.MemberService;
 import com.second.talentstock.userInterestJoin.service.UserInterestJoinService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+
+import java.time.LocalDate;
+
+import static com.second.talentstock.member.domain.MemberType.STUDENT;
 import static com.second.talentstock.member.domain.MemberType.COMPANY;
+
 
 @SpringBootTest
 public class GenerateTestData {
@@ -22,6 +30,9 @@ public class GenerateTestData {
 
     @Autowired
     UserInterestJoinService userInterestJoinService;
+
+    @Autowired
+    AwardRepository awardRepository;
 
     @Test
     public void generateTestMemberData() throws Exception {
@@ -103,6 +114,27 @@ public class GenerateTestData {
 //
 //            memberService.save(companyMember);
 //        }
+    }
+    @Test
+    public void generateTestAwardEtc() throws Exception {
+        Member member = memberService.findById(5l);
+
+        Award award1 = Award.builder()
+                .member(member)
+                .awardDate(LocalDate.now())
+                .title("최우수상")
+                .content("해커톤에서 1등함 서버를 맡음")
+                .build();
+
+        Award award2 = Award.builder()
+                .member(member)
+                .awardDate(LocalDate.now().minusYears(1l))
+                .title("장려상")
+                .content("해커톤에서 3등")
+                .build();
+
+        awardRepository.save(award1);
+        awardRepository.save(award2);
     }
 
     @Test

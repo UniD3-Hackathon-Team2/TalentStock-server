@@ -2,6 +2,7 @@ package com.second.talentstock.member.domain.user_info;
 
 import com.second.talentstock.member.domain.Member;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,4 +29,12 @@ public class Award {
     private String content;
 
     private LocalDate awardDate;
+
+    @Builder
+    public Award(Member member, String title, String content, LocalDate awardDate) {
+        this.member = member;
+        this.title = title;
+        this.content = content;
+        this.awardDate = awardDate;
+    }
 }
