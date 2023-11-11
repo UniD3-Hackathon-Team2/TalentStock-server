@@ -8,8 +8,6 @@ import lombok.Getter;
 public class CompanyMember extends Member {
     private String logoImgUrl;
 
-    private String name;
-
     private String explanation;
 
     private Boolean isCompulsoryWork;

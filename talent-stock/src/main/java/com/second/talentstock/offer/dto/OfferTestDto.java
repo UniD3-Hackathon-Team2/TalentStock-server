@@ -1,4 +1,4 @@
-package com.second.talentstock.Offer.dto;
+package com.second.talentstock.offer.dto;
 
 import lombok.Data;
 

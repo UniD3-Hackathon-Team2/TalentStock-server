@@ -20,8 +20,7 @@ public class Project {
     private Long id;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "member_id")
-    @Column(unique = true)
+    @JoinColumn(name = "member")
     private Member member;
 
     private String projectName;
