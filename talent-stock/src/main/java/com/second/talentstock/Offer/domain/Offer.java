@@ -32,10 +32,8 @@ public class Offer extends BaseEntity {
 
     private String content;
 
-    @Enumerated(STRING)
-    private CheckState isChecked;
+    private Boolean isChecked;
 
     @Enumerated(STRING)
     private OfferType offerType;
-
 }
