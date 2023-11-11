@@ -46,6 +46,7 @@ public enum BaseResponseStatus {
     NOT_ALLOW_MODIFY_USER(false, 2600, "해당 유저를 수정할 권한이 없습니다. 로그인 정보를 확인해주세요"),
 
     // offer (3200 ~ 3299)
+    NOT_ALLOW_GRANT_OFFER(false, 3200, "오퍼를 받을 수 있는 권한이 없습니다. 로그인 정보를 확인하세요"),
 
     // interest (3300 ~ 3399)
 

@@ -2,7 +2,6 @@ package com.second.talentstock.member.controller;
 
 import com.second.talentstock.common.BaseException;
 import com.second.talentstock.common.BaseResponse;
-import com.second.talentstock.common.BaseResponseStatus;
 import com.second.talentstock.member.dto.LoginMemberReqDto;
 import com.second.talentstock.member.dto.ModifyMemberReqDto;
 import com.second.talentstock.member.dto.SearchStudentReqDto;
@@ -32,11 +31,11 @@ public class MemberController {
     }
 
     @PatchMapping("/{memberId}")
-    public BaseResponse<?> modifyMember(@RequestParam("memberId") Long memberId,
-                                               @RequestHeader("Authorization") Long loginId,
-                                               @RequestBody ModifyMemberReqDto reqDto) {
+    public BaseResponse<?> modifyMember(@PathVariable("memberId") Long memberId,
+                                        @RequestHeader("Authorization") Long loginId,
+                                        @RequestBody ModifyMemberReqDto reqDto) {
         try {
-            if (!memberId.equals(loginId)){
+            if (!memberId.equals(loginId)) {
                 throw new BaseException(NOT_ALLOW_MODIFY_USER);
             }
             memberService.modifyMember(memberId, reqDto);
