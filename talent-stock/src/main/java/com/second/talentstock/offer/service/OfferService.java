@@ -3,11 +3,13 @@ package com.second.talentstock.offer.service;
 
 import com.second.talentstock.common.BaseException;
 import com.second.talentstock.member.domain.CompanyMember;
+import com.second.talentstock.member.domain.InvestorMember;
 import com.second.talentstock.member.domain.Member;
 import com.second.talentstock.member.repository.MemberRepository;
 import com.second.talentstock.offer.domain.Offer;
 import com.second.talentstock.offer.dto.CompanyReceivedOfferResDto;
 import com.second.talentstock.offer.dto.MakeOfferReqDto;
+import com.second.talentstock.offer.dto.StockReceivedOfferResDto;
 import com.second.talentstock.offer.repository.OfferRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_OFFER_ID;
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_USER_ID;
+import static com.second.talentstock.offer.domain.OfferType.INVEST;
 import static com.second.talentstock.offer.domain.OfferType.JOB;
 
 @Service
@@ -74,5 +77,15 @@ public class OfferService {
         ).collect(Collectors.toList());
 
         return new CompanyReceivedOfferResDto(companyList);
+    }
+
+    public StockReceivedOfferResDto getStockReceivedOfferResDto(Long memberId) throws BaseException {
+        Member receiver = findMemberById(memberId);
+        List<Offer> offerList = offerRepository.findByReceiverAndOfferType(receiver, INVEST);
+        List<InvestorMember> investorMemberList = offerList.stream().map(
+                offer -> (InvestorMember) offer.getSender()
+        ).collect(Collectors.toList());
+
+        return new StockReceivedOfferResDto(investorMemberList);
     }
 }

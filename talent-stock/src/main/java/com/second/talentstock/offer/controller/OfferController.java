@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import static com.second.talentstock.common.BaseResponseStatus.SUCCESS;
-import static com.second.talentstock.offer.domain.OfferType.*;
+import static com.second.talentstock.offer.domain.OfferType.INVEST;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,9 +34,9 @@ public class OfferController {
                                             @RequestParam("offerType") OfferType offerType) {
         try {
             if (offerType.equals(INVEST)) {
-
+                return new BaseResponse<>(offerService.getStockReceivedOfferResDto(memberId));
             } else {
-                offerService.getCompanyReceivedOfferResDto(memberId);
+                return new BaseResponse<>(offerService.getCompanyReceivedOfferResDto(memberId));
             }
         } catch (BaseException e) {
             return new BaseResponse<>(e.getStatus());

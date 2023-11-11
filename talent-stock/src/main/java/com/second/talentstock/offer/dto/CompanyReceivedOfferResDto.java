@@ -27,10 +27,12 @@ public class CompanyReceivedOfferResDto {
     @AllArgsConstructor
     public static class CompanyOfferDto {
         private String companyName;
+        private int scholarship;
         private String position;
         private int mustWorkingYear;
 
         public CompanyOfferDto(CompanyMember companyMember) {
+            this.scholarship = companyMember.getScholarship();
             this.companyName = companyMember.getName();
             this.position = companyMember.getPosition();
             this.mustWorkingYear = companyMember.getMustWorkingYear();
