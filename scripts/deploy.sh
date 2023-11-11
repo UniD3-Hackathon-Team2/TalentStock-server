@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-REPOSITORY=/home/ubuntu/talentstock/talentstock
+REPOSITORY=/home/ubuntu/talentstock/talent-stock
 cd $REPOSITORY
 
 APP_NAME=talentstock
