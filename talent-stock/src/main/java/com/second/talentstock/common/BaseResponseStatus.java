@@ -28,6 +28,7 @@ public enum BaseResponseStatus {
     INVALID_SENDER_ID(false, 2201, "유효하지 않은 송신자(Sender) 유저 ID 값 입니다."),
 
     // interest (2300 ~ 2399)
+    INVALID_INTEREST_TAG_ID(false, 2300, "유효하지 않은 관심 분야 태그 ID입니"),
 
 
     /**

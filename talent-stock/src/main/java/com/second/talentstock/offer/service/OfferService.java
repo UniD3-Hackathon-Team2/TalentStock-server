@@ -1,8 +1,8 @@
-package com.second.talentstock.Offer.service;
+package com.second.talentstock.offer.service;
 
 
-import com.second.talentstock.Offer.domain.Offer;
-import com.second.talentstock.Offer.repository.OfferRepository;
+import com.second.talentstock.offer.domain.Offer;
+import com.second.talentstock.offer.repository.OfferRepository;
 import com.second.talentstock.common.BaseException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

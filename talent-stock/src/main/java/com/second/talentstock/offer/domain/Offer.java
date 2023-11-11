@@ -1,6 +1,7 @@
-package com.second.talentstock.Offer.domain;
+package com.second.talentstock.offer.domain;
 
 
+import com.second.talentstock.member.domain.Member;
 import com.second.talentstock.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -24,9 +25,13 @@ public class Offer extends BaseEntity {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    private Long receiverId;
+    @ManyToOne
+    @JoinColumn(name="receiver_id")
+    private Member receiverId;
 
-    private Long senderId;
+    @ManyToOne
+    @JoinColumn(name="sender_id")
+    private Member senderId;
 
     private String title;
 
