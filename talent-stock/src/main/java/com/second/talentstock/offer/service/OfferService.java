@@ -2,15 +2,20 @@ package com.second.talentstock.offer.service;
 
 
 import com.second.talentstock.common.BaseException;
+import com.second.talentstock.interestTag.repository.InterestTagRepository;
 import com.second.talentstock.member.domain.CompanyMember;
 import com.second.talentstock.member.domain.InvestorMember;
 import com.second.talentstock.member.domain.Member;
+import com.second.talentstock.member.domain.StudentMember;
 import com.second.talentstock.member.repository.MemberRepository;
 import com.second.talentstock.offer.domain.Offer;
 import com.second.talentstock.offer.dto.CompanyReceivedOfferResDto;
+import com.second.talentstock.offer.dto.GetSendingOfferResDto;
 import com.second.talentstock.offer.dto.MakeOfferReqDto;
 import com.second.talentstock.offer.dto.StockReceivedOfferResDto;
 import com.second.talentstock.offer.repository.OfferRepository;
+import com.second.talentstock.userInterestJoin.domain.UserInterestJoin;
+import com.second.talentstock.userInterestJoin.repository.UserInterestJoinRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +27,7 @@ import static com.second.talentstock.common.BaseResponseStatus.*;
 import static com.second.talentstock.offer.domain.OfferType.INVEST;
 import static com.second.talentstock.offer.domain.OfferType.JOB;
 import static com.second.talentstock.offer.dto.CompanyReceivedOfferResDto.CompanyOfferDto;
+import static com.second.talentstock.offer.dto.GetSendingOfferResDto.SendingOfferResDto;
 import static com.second.talentstock.offer.dto.StockReceivedOfferResDto.InvestorOfferDto;
 
 @Service
@@ -30,6 +36,8 @@ public class OfferService {
 
     private final OfferRepository offerRepository;
     private final MemberRepository memberRepository;
+    private final UserInterestJoinRepository userInterestJoinRepository;
+    private final InterestTagRepository interestTagRepository;
 
     @Transactional
     public void save(Offer offer) {
@@ -97,12 +105,29 @@ public class OfferService {
     }
 
     @Transactional
-    public void grantOffer(Long memberId, Long offerId) throws BaseException{
+    public void grantOffer(Long memberId, Long offerId) throws BaseException {
         Member member = findMemberById(memberId);
         Offer offer = findById(offerId);
         if (!offer.getReceiver().getId().equals(member.getId())) {
             throw new BaseException(NOT_ALLOW_GRANT_OFFER);
         }
         offer.setChecked(true);
+    }
+
+    public GetSendingOfferResDto getSendingOffer(Long companyMemberId) throws BaseException {
+        Member companyMember = findMemberById(companyMemberId);
+
+        List<Offer> offerList = offerRepository.findBySender(companyMember);
+        List<SendingOfferResDto> resDtos = offerList.stream().map(
+                offer -> {
+                    Member member = offer.getReceiver();
+//                    List<UserInterestJoin> userInterestJoinList = userInterestJoinRepository.findByMember(member);
+                    String interest = "프론트엔드";
+
+                    return new SendingOfferResDto((StudentMember) member, offer, interest);
+                }
+        ).collect(Collectors.toList());
+
+        return new GetSendingOfferResDto(resDtos);
     }
 }
