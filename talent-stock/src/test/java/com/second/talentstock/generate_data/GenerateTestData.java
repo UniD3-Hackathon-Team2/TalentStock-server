@@ -117,24 +117,24 @@ public class GenerateTestData {
     }
     @Test
     public void generateTestAwardEtc() throws Exception {
-        Member member = memberService.findById(5l);
-
-        Award award1 = Award.builder()
-                .member(member)
-                .awardDate(LocalDate.now())
-                .title("최우수상")
-                .content("해커톤에서 1등함 서버를 맡음")
-                .build();
-
-        Award award2 = Award.builder()
-                .member(member)
-                .awardDate(LocalDate.now().minusYears(1l))
-                .title("장려상")
-                .content("해커톤에서 3등")
-                .build();
-
-        awardRepository.save(award1);
-        awardRepository.save(award2);
+//        Member member = memberService.findById(5l);
+//
+//        Award award1 = Award.builder()
+//                .member(member)
+//                .awardDate(LocalDate.now())
+//                .title("최우수상")
+//                .content("해커톤에서 1등함 서버를 맡음")
+//                .build();
+//
+//        Award award2 = Award.builder()
+//                .member(member)
+//                .awardDate(LocalDate.now().minusYears(1l))
+//                .title("장려상")
+//                .content("해커톤에서 3등")
+//                .build();
+//
+//        awardRepository.save(award1);
+//        awardRepository.save(award2);
     }
 
     @Test
