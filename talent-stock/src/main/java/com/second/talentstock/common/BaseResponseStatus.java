@@ -24,6 +24,9 @@ public enum BaseResponseStatus {
 
     // offer (2200 ~ 2299)
 
+    INVALID_RECIEVER_ID(false, 2200, "유효하지 않은 수신자(Receiver) 유저 ID 값 입니다."),
+    INVALID_SENDER_ID(false, 2201, "유효하지 않은 송신자(Sender) 유저 ID 값 입니다."),
+
     // interest (2300 ~ 2399)
 
 
