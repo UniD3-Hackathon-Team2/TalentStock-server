@@ -16,7 +16,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/login")
-    public BaseResponse<?> login(@RequestParam("id") String id, @RequestParam("id") String pw) {
+    public BaseResponse<?> login(@RequestParam("id") String id, @RequestParam("pw") String pw) {
         try {
             return new BaseResponse(memberService.findByIdAndPw(id, pw));
         } catch (BaseException e) {
