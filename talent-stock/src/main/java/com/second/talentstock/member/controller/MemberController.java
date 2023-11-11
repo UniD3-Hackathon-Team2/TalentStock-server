@@ -21,6 +21,7 @@ import static com.second.talentstock.member.domain.MemberType.STUDENT;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/member")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MemberController {
     private final MemberService memberService;
 
