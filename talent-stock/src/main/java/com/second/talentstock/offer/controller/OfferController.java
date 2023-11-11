@@ -29,17 +29,17 @@ public class OfferController {
         }
     }
 
-//    @GetMapping("")
-//    public BaseResponse<?> getReceivedOffer(@RequestHeader("Authorization") Long memberId,
-//                                            @RequestParam("offerType") OfferType offerType) {
-//        try {
-//            if (offerType.equals(INVEST)) {
-//
-//            } else {
-//                offerService.getCompanyReceivedOfferResDto(memberId);
-//            }
-//        } catch (BaseException e) {
-//            return new BaseResponse<>(e.getStatus());
-//        }
-//    }
+    @GetMapping("")
+    public BaseResponse<?> getReceivedOffer(@RequestHeader("Authorization") Long memberId,
+                                            @RequestParam("offerType") OfferType offerType) {
+        try {
+            if (offerType.equals(INVEST)) {
+
+            } else {
+                offerService.getCompanyReceivedOfferResDto(memberId);
+            }
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
 }

@@ -6,13 +6,10 @@ import lombok.Getter;
 @Entity
 @Getter
 public class CompanyMember extends Member {
-    private String logoImgUrl;
 
-    private String explanation;
+    private int scholarship;
 
-    private Boolean isCompulsoryWork;
+    private String position;
 
     private int mustWorkingYear;
-
-    private String jobTask;
 }
