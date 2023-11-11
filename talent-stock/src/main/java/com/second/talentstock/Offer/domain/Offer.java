@@ -1,6 +1,7 @@
 package com.second.talentstock.Offer.domain;
 
 
+import com.second.talentstock.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,15 +18,15 @@ import static lombok.AccessLevel.PROTECTED;
 @Setter
 @NoArgsConstructor(access = PROTECTED)
 @Entity
-public class Offer {
+public class Offer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    private Long receiverID;
+    private Long receiverId;
 
-    private Long senderID;
+    private Long senderId;
 
     private String title;
 

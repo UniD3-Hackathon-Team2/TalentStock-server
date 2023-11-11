@@ -3,9 +3,12 @@ package com.second.talentstock.Offer.service;
 
 import com.second.talentstock.Offer.domain.Offer;
 import com.second.talentstock.Offer.repository.OfferRepository;
+import com.second.talentstock.common.BaseException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import static com.second.talentstock.common.BaseResponseStatus.*;
 
 @Service
 @RequiredArgsConstructor
@@ -18,13 +21,15 @@ public class OfferService {
         offerRepository.save(offer);
     }
 
-    public Offer FindBySenderId(Long id) {
-        return (Offer) offerRepository.findBySenderId(id)
-                .orElseThrow();
+    public Offer findBySenderId(Long id) throws BaseException {
+        return offerRepository.findBySenderId(id)
+                .orElseThrow(() -> new BaseException(INVALID_SENDER_ID));
     }
 
-    public Offer FindByReceiver(Long id) {
-        return (Offer) offerRepository.findByReceiverId(id)
-                .orElseThrow();
+    public Offer findByReceiverID(Long id) throws BaseException {
+        return offerRepository.findByReceiverId(id)
+                .orElseThrow(() -> new BaseException(INVALID_RECIEVER_ID));
     }
+
+
 }

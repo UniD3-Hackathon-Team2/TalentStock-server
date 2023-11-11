@@ -1,32 +1,12 @@
 package com.second.talentstock.Offer.repository;
 
 import com.second.talentstock.Offer.domain.Offer;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
-@Repository
-public class OfferRepository {
+public interface OfferRepository extends JpaRepository<Offer, Long> {
+    Optional<Offer> findBySenderId(Long id);
 
-    private static Map<Long, Offer> store = new HashMap<>();
-    private static long sequence = 0L;
-
-
-    public Offer save(Offer offer) {
-        offer.setId(++sequence);
-        store.put(offer.getId(), offer);
-        return offer;
-    }
-
-
-    public Optional<Offer> findBySenderId(Long id) {
-        return Optional.ofNullable(store.get(id));
-    }
-
-    public Optional<Offer> findByReceiverId(Long id) {
-        return Optional.ofNullable(store.get(id));
-    }
-
+    Optional<Offer> findByReceiverId(Long id);
 }
