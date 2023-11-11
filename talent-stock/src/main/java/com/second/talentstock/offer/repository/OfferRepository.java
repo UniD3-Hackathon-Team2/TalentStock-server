@@ -1,6 +1,6 @@
-package com.second.talentstock.Offer.repository;
+package com.second.talentstock.offer.repository;
 
-import com.second.talentstock.Offer.domain.Offer;
+import com.second.talentstock.offer.domain.Offer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

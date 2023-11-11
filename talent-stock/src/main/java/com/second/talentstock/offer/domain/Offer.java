@@ -1,4 +1,4 @@
-package com.second.talentstock.Offer.domain;
+package com.second.talentstock.offer.domain;
 
 
 import com.second.talentstock.common.BaseEntity;
