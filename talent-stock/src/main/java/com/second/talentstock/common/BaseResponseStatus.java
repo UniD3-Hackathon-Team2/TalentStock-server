@@ -21,6 +21,7 @@ public enum BaseResponseStatus {
 
     // user (2000 ~ 2199)
     INVALID_USER_ID(false, 2000, "유효하지 않은 유저 ID값 입니다."),
+    INVALID_LOGIN_INFO(false, 2001, "유효하지 않은 로그인 정보입니다."),
 
     // offer (2200 ~ 2299)
 
