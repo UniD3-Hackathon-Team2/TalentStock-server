@@ -5,6 +5,7 @@ package com.second.talentstock.offer.domain;
 import com.second.talentstock.member.domain.Member;
 import com.second.talentstock.common.BaseEntity;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,7 +27,6 @@ public class Offer extends BaseEntity {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-
     @ManyToOne
     @JoinColumn(name="receiver_id")
     private Member receiver;
@@ -35,12 +35,15 @@ public class Offer extends BaseEntity {
     @JoinColumn(name="sender_id")
     private Member sender;
 
-    private String title;
-
-    private String content;
-
     private Boolean isChecked;
 
     @Enumerated(STRING)
     private OfferType offerType;
+
+    @Builder
+    public Offer(Member receiver, Member sender, OfferType offerType) {
+        this.receiver = receiver;
+        this.sender = sender;
+        this.offerType = offerType;
+    }
 }
