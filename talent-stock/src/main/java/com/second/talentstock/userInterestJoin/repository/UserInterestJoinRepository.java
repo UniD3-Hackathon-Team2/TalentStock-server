@@ -9,14 +9,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface UserInterestJoinRepository extends JpaRepository<UserInterestJoin, Long> {
 
-    Optional<UserInterestJoin> findByMember(Member member);
+    List<UserInterestJoin> findByMember(Member member);
 
-    UserInterestJoin findByMemberRaw(Member member);
-
-    Optional<UserInterestJoin> findByInterestTag(InterestTag interestTag);
+    List<UserInterestJoin> findByInterestTag(InterestTag interestTag);
 }

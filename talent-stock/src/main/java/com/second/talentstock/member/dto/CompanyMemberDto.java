@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 public class CompanyMemberDto {
@@ -12,14 +14,13 @@ public class CompanyMemberDto {
     private MemberType memberType;
     private String name;
     private String email;
-
-
     private String explanation;
     private Boolean isCompulsoryWork;
     private int mustWorkingYear;
     private String positionNeed;
     private String positionExplanation;
     private int scholarship;
+    private List<String> tagList;
 
 
     @Builder

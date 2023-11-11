@@ -1,6 +1,7 @@
 package com.second.talentstock.member.service;
 
 import com.second.talentstock.common.BaseException;
+import com.second.talentstock.interestTag.domain.InterestTag;
 import com.second.talentstock.interestTag.repository.InterestTagRepository;
 import com.second.talentstock.member.domain.CompanyMember;
 import com.second.talentstock.member.domain.Member;
@@ -11,12 +12,14 @@ import com.second.talentstock.member.repository.CompanyMemberRepository;
 import com.second.talentstock.member.repository.MemberRepository;
 import com.second.talentstock.member.repository.StudentMemberRepository;
 import com.second.talentstock.member.repository.user_info_repository.*;
+import com.second.talentstock.userInterestJoin.domain.UserInterestJoin;
 import com.second.talentstock.userInterestJoin.repository.UserInterestJoinRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_LOGIN_INFO;
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_USER_ID;
@@ -96,6 +99,13 @@ public class MemberService {
         StudentMember studentMember = studentMemberRepository.findById(id)
                 .orElseThrow(() -> new BaseException(INVALID_USER_ID));
 
+        List<UserInterestJoin> userInterestJoinList = userInterestJoinRepository.findByMember(studentMember);
+        List<InterestTag> interestTags = userInterestJoinList.stream().map(
+                userInterestJoin -> {
+                    return userInterestJoin.getInterestTag();
+                }
+        ).collect(Collectors.toList());
+
         return StudentMemberDto.builder()
                 .memberType(studentMember.getMemberType())
                 .name(studentMember.getName())
@@ -111,14 +121,22 @@ public class MemberService {
                 .foreignScoreList(foreignScoreRepository.findByMember(studentMember))
                 .groupActivityList(groupActivityRepository.findByMember(studentMember))
                 .projectList(projectRepository.findByMember(studentMember))
-                .interestTagList(interestTagRepository.findByUserInterestJoin(userInterestJoinRepository.findByMemberRaw(studentMember)))
+                .interestTagList(interestTags)
                 .build();
     }
 
     public CompanyMemberDto showCompanyProfile(Long id) throws BaseException {
         CompanyMember companyMember = companyMemberRepository.findById(id)
                 .orElseThrow(() -> new BaseException(INVALID_USER_ID));
-        return CompanyMemberDto.builder()
+
+        List<UserInterestJoin> userInterestJoinList = userInterestJoinRepository.findByMember(companyMember);
+        List<String> interestTags = userInterestJoinList.stream().map(
+                userInterestJoin -> {
+                    return userInterestJoin.getInterestTag().getTagName();
+                }
+        ).collect(Collectors.toList());
+
+        CompanyMemberDto dto = CompanyMemberDto.builder()
                 .memberType(companyMember.getMemberType())
                 .name(companyMember.getName())
                 .email(companyMember.getEmail())
@@ -129,5 +147,9 @@ public class MemberService {
                 .positionExplanation(companyMember.getPositionExplanation())
                 .scholarship(companyMember.getScholarship())
                 .build();
+
+        dto.setTagList(interestTags);
+
+        return dto;
     }
 }

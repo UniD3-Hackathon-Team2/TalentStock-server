@@ -43,9 +43,8 @@ public class MemberController {
         }
     }
           
-    @GetMapping("/profile")
-    @ResponseBody
-    public BaseResponse<?> profile(@RequestParam("id") Long id) {
+    @GetMapping("/{userId}")
+    public BaseResponse<?> profile(@PathVariable("userId") Long id) {
         try {
             if (memberService.judgeMemberType(id) == STUDENT) {
                 return new BaseResponse<>(memberService.showStudentProfile(id));

@@ -14,7 +14,5 @@ import java.util.Optional;
 @Repository
 public interface InterestTagRepository extends JpaRepository<InterestTag, Long> {
 
-    List<InterestTag> findByUserInterestJoin(UserInterestJoin userInterestJoin);
-
     Optional<InterestTag> findByTopCategory(InterestTag topCategory);
 }
