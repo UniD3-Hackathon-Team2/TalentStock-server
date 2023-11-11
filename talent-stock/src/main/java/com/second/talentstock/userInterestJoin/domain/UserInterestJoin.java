@@ -22,10 +22,10 @@ public class UserInterestJoin {
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    private Member userId;
+    private Member member;
 
     @ManyToOne
     @JoinColumn(name="interest_id")
-    private InterestTag interestId;
+    private InterestTag interestTag;
 
 }
