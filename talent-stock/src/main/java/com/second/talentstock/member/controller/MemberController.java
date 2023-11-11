@@ -2,12 +2,11 @@ package com.second.talentstock.member.controller;
 
 import com.second.talentstock.common.BaseException;
 import com.second.talentstock.common.BaseResponse;
+import com.second.talentstock.member.dto.LoginMemberReqDto;
+import com.second.talentstock.member.dto.SearchStudentReqDto;
 import com.second.talentstock.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,12 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
     private final MemberService memberService;
 
-    @GetMapping("/login")
-    public BaseResponse<?> login(@RequestParam("id") String id, @RequestParam("pw") String pw) {
+    @PostMapping("/login")
+    public BaseResponse<?> login(@RequestBody LoginMemberReqDto reqDto) {
         try {
-            return new BaseResponse(memberService.findByIdAndPw(id, pw));
+            return new BaseResponse(memberService.findByIdAndPw(reqDto));
         } catch (BaseException e) {
             return new BaseResponse(e.getStatus());
+        }
+    }
+
+    @PostMapping("/search")
+    public BaseResponse<?> searchStudent(@RequestBody SearchStudentReqDto reqDto) {
+        try {
+            return new BaseResponse<>(memberService.searchStudent(reqDto));
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
         }
     }
 }
