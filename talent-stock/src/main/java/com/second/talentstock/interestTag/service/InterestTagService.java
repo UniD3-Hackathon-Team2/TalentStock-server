@@ -9,6 +9,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static com.second.talentstock.common.BaseResponseStatus.INVALID_INTEREST_TAG_ID;
+import static com.second.talentstock.common.BaseResponseStatus.INVALID_TOP_CATEGORY_TAG_ID;
+
 @Service
 @RequiredArgsConstructor
 public class InterestTagService {
@@ -22,6 +25,11 @@ public class InterestTagService {
 
     public InterestTag findById(Long id) throws BaseException {
         return interestTagReposiroty.findById(id)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.INVALID_INTEREST_TAG_ID));
+                .orElseThrow(() -> new BaseException(INVALID_INTEREST_TAG_ID));
+    }
+
+    public InterestTag findByTopCategory(Long id) throws BaseException {
+        return interestTagReposiroty.findByTopCategory(id)
+                .orElseThrow(() -> new BaseException(INVALID_TOP_CATEGORY_TAG_ID));
     }
 }
