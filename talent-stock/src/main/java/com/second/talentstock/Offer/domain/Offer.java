@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.persistence.Id;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
 
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.GenerationType.IDENTITY;
@@ -29,7 +32,7 @@ public class Offer {
     private String content;
 
     @Enumerated(STRING)
-    private CheckState ischecked;
+    private CheckState isChecked;
 
     @Enumerated(STRING)
     private OfferType offerType;
