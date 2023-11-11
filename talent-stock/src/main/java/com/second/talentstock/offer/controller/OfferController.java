@@ -46,4 +46,15 @@ public class OfferController {
             return new BaseResponse<>(e.getStatus());
         }
     }
+
+    @PatchMapping("/{offerId}")
+    public BaseResponse<?> grantOffer(@RequestHeader("Authorization") Long memberId,
+                                      @PathVariable("offerId") Long offerId) {
+        try {
+            offerService.grantOffer(memberId, offerId);
+            return new BaseResponse<>(SUCCESS);
+        } catch (BaseException e) {
+            return new BaseResponse<>(e.getStatus());
+        }
+    }
 }

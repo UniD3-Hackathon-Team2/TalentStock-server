@@ -18,10 +18,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.second.talentstock.common.BaseResponseStatus.INVALID_OFFER_ID;
-import static com.second.talentstock.common.BaseResponseStatus.INVALID_USER_ID;
+import static com.second.talentstock.common.BaseResponseStatus.*;
 import static com.second.talentstock.offer.domain.OfferType.INVEST;
 import static com.second.talentstock.offer.domain.OfferType.JOB;
+import static com.second.talentstock.offer.dto.CompanyReceivedOfferResDto.CompanyOfferDto;
+import static com.second.talentstock.offer.dto.StockReceivedOfferResDto.InvestorOfferDto;
 
 @Service
 @RequiredArgsConstructor
@@ -72,8 +73,11 @@ public class OfferService {
     public CompanyReceivedOfferResDto getCompanyReceivedOfferResDto(Long memberId) throws BaseException {
         Member receiver = findMemberById(memberId);
         List<Offer> offerList = offerRepository.findByReceiverAndOfferType(receiver, JOB);
-        List<CompanyMember> companyList = offerList.stream().map(
-                offer -> (CompanyMember) offer.getSender()
+
+        List<CompanyOfferDto> companyList = offerList.stream().map(
+                offer -> {
+                    return new CompanyOfferDto((CompanyMember) offer.getSender(), offer);
+                }
         ).collect(Collectors.toList());
 
         return new CompanyReceivedOfferResDto(companyList);
@@ -82,10 +86,23 @@ public class OfferService {
     public StockReceivedOfferResDto getStockReceivedOfferResDto(Long memberId) throws BaseException {
         Member receiver = findMemberById(memberId);
         List<Offer> offerList = offerRepository.findByReceiverAndOfferType(receiver, INVEST);
-        List<InvestorMember> investorMemberList = offerList.stream().map(
-                offer -> (InvestorMember) offer.getSender()
+
+        List<InvestorOfferDto> investorMemberList = offerList.stream().map(
+                offer -> {
+                    return new InvestorOfferDto((InvestorMember) offer.getSender(), offer);
+                }
         ).collect(Collectors.toList());
 
         return new StockReceivedOfferResDto(investorMemberList);
+    }
+
+    @Transactional
+    public void grantOffer(Long memberId, Long offerId) throws BaseException{
+        Member member = findMemberById(memberId);
+        Offer offer = findById(offerId);
+        if (!offer.getReceiver().getId().equals(member.getId())) {
+            throw new BaseException(NOT_ALLOW_GRANT_OFFER);
+        }
+        offer.setChecked(true);
     }
 }
