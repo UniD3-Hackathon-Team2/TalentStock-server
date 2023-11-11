@@ -1,43 +1,26 @@
 package com.second.talentstock.member.service;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.second.talentstock.common.BaseException;
 import com.second.talentstock.member.domain.CompanyMember;
 import com.second.talentstock.member.domain.Member;
-import com.second.talentstock.member.domain.StudentMember;
-import com.second.talentstock.member.dto.LoginMemberReqDto;
-import com.second.talentstock.member.dto.LoginMemberResDto;
-import com.second.talentstock.member.dto.SearchStudentReqDto;
-import com.second.talentstock.member.dto.SearchStudentResDto;
-import com.second.talentstock.member.repository.MemberRepository;
-import com.second.talentstock.member.repository.StudentMemberRepository;
 import com.second.talentstock.member.domain.MemberType;
 import com.second.talentstock.member.domain.StudentMember;
 import com.second.talentstock.member.domain.user_info.*;
-import com.second.talentstock.member.dto.CompanyMemberDto;
-import com.second.talentstock.member.dto.LoginMemberResDto;
-import com.second.talentstock.member.dto.StudentMemberDto;
+import com.second.talentstock.member.dto.*;
 import com.second.talentstock.member.dto.user_info_Dto.*;
 import com.second.talentstock.member.repository.CompanyMemberRepository;
 import com.second.talentstock.member.repository.MemberRepository;
 import com.second.talentstock.member.repository.StudentMemberRepository;
 import com.second.talentstock.member.repository.user_info_repository.*;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import javax.swing.text.html.Option;
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_LOGIN_INFO;
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_USER_ID;
-import static jakarta.persistence.FetchType.LAZY;
 
 @Service
 @RequiredArgsConstructor
@@ -45,13 +28,12 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final StudentMemberRepository studentMemberRepository;
 
-    private StudentMemberRepository studentMemberRepository;
-    private CompanyMemberRepository companyMemberRepository;
-    private AwardRepository awardRepository;
-    private CertificateRepository certificateRepository;
-    private ForeignScoreRepository foreignScoreRepository;
-    private GroupActivityRepository groupActivityRepository;
-    private ProjectRepository projectRepository;
+    private final CompanyMemberRepository companyMemberRepository;
+    private final AwardRepository awardRepository;
+    private final CertificateRepository certificateRepository;
+    private final ForeignScoreRepository foreignScoreRepository;
+    private final GroupActivityRepository groupActivityRepository;
+    private final ProjectRepository projectRepository;
 
     @Transactional
     public void save(Member member) {
@@ -99,12 +81,13 @@ public class MemberService {
         }
 
         return new SearchStudentResDto(studentMemberList);
+    }
 
 
     public MemberType judgeMemberType(Long id) throws BaseException {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new BaseException(INVALID_USER_ID));
-        return member.getUserType();
+        return member.getMemberType();
     }
 
     public StudentMemberDto showStudentProfile(Long id) throws BaseException {
@@ -165,7 +148,7 @@ public class MemberService {
 
         return StudentMemberDto.builder()
                 .department(studentMember.getDepartment())
-                .grade(studentMember.getGrade())
+                .grade(Integer.parseInt(studentMember.getGrade()))
                 .majorScore(studentMember.getMajorScore())
                 .totalScore(studentMember.getTotalScore())
                 .shortIntroduce(studentMember.getShortIntroduce())
