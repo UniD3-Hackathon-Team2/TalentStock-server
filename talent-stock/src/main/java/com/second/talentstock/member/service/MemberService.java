@@ -7,6 +7,8 @@ import com.second.talentstock.member.domain.CompanyMember;
 import com.second.talentstock.member.domain.Member;
 import com.second.talentstock.member.domain.MemberType;
 import com.second.talentstock.member.domain.StudentMember;
+import com.second.talentstock.member.domain.*;
+import com.second.talentstock.member.domain.user_info.*;
 import com.second.talentstock.member.dto.*;
 import com.second.talentstock.member.repository.CompanyMemberRepository;
 import com.second.talentstock.member.repository.MemberRepository;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_LOGIN_INFO;
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_USER_ID;
+import static com.second.talentstock.member.domain.MemberType.*;
 
 @Service
 @RequiredArgsConstructor
@@ -144,7 +147,7 @@ public class MemberService {
                 .explanation(companyMember.getExplanation())
                 .isCompulsoryWork(companyMember.getIsCompulsoryWork())
                 .mustWorkingYear(companyMember.getMustWorkingYear())
-                .positionNeed(companyMember.getPositionNeed())
+                .positionNeed(companyMember.getPosition())
                 .positionExplanation(companyMember.getPositionExplanation())
                 .scholarship(companyMember.getScholarship())
                 .build();
@@ -152,5 +155,31 @@ public class MemberService {
         dto.setTagList(interestTags);
 
         return dto;
+    }
+
+    @Transactional
+    public void modifyMember(Long memberId, ModifyMemberReqDto reqDto) throws BaseException{
+        if (reqDto.getMemberType().equals(STUDENT)) {
+            modifyStudent(memberId, reqDto);
+        } else if (reqDto.getMemberType().equals(COMPANY)) {
+            modifyCompany(memberId, reqDto);
+        } else {
+            modifyInvestor(memberId, reqDto);
+        }
+    }
+
+    private void modifyStudent(Long memberId, ModifyMemberReqDto reqDto) throws BaseException {
+        StudentMember student = (StudentMember) findById(memberId);
+        reqDto.modifyStudent(student);
+    }
+
+    private void modifyCompany(Long memberId, ModifyMemberReqDto reqDto) throws BaseException {
+        CompanyMember company = (CompanyMember) findById(memberId);
+        reqDto.modifyCompany(company);
+    }
+
+    private void modifyInvestor(Long memberId, ModifyMemberReqDto reqDto) throws BaseException {
+        InvestorMember investor = (InvestorMember) findById(memberId);
+        reqDto.modifyInvestor(investor);
     }
 }

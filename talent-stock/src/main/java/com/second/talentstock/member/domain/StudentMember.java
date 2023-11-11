@@ -3,12 +3,9 @@ package com.second.talentstock.member.domain;
   
 import com.second.talentstock.userInterestJoin.domain.UserInterestJoin;
 import jakarta.persistence.Entity;
-import lombok.AccessLevel;
-import lombok.Builder;
+import lombok.*;
 import com.second.talentstock.member.domain.user_info.*;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import static lombok.AccessLevel.*;
 
@@ -17,6 +14,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = PROTECTED)
 public class StudentMember extends Member {
     private String university;

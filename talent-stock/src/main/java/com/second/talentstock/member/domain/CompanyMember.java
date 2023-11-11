@@ -6,8 +6,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
 import java.util.List;
+import lombok.Setter;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -16,9 +16,9 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 public class CompanyMember extends Member {
 
-    private String explanation;
+    private int scholarship;
 
-    private Boolean isCompulsoryWork;
+    private String position;
 
     private int mustWorkingYear;
 
@@ -29,8 +29,8 @@ public class CompanyMember extends Member {
     private int scholarship;
 
     @Builder
-
-    public CompanyMember(String loginID, String loginPW, MemberType memberType, String name, String email, List<UserInterestJoin> userInterestJoins, String explanation, Boolean isCompulsoryWork, int mustWorkingYear, String positionNeed, String positionExplanation, int scholarship) {
+    public CompanyMember(String loginID, String loginPW, MemberType memberType, String name, String email, List<UserInterestJoin> userInterestJoins, 
+                         String explanation, Boolean isCompulsoryWork, int mustWorkingYear, String positionNeed, String positionExplanation, int scholarship) {
         super(loginID, loginPW, memberType, name, email, userInterestJoins);
         this.explanation = explanation;
         this.isCompulsoryWork = isCompulsoryWork;
