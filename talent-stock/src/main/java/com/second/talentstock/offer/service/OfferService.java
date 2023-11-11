@@ -5,6 +5,8 @@ import com.second.talentstock.common.BaseException;
 import com.second.talentstock.member.domain.Member;
 import com.second.talentstock.member.repository.MemberRepository;
 import com.second.talentstock.offer.domain.Offer;
+import com.second.talentstock.offer.domain.OfferType;
+import com.second.talentstock.offer.dto.CompanyReceivedOfferResDto;
 import com.second.talentstock.offer.dto.MakeOfferReqDto;
 import com.second.talentstock.offer.repository.OfferRepository;
 import jakarta.transaction.Transactional;
@@ -15,6 +17,7 @@ import java.util.List;
 
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_OFFER_ID;
 import static com.second.talentstock.common.BaseResponseStatus.INVALID_USER_ID;
+import static com.second.talentstock.offer.domain.OfferType.*;
 
 @Service
 @RequiredArgsConstructor
@@ -61,4 +64,12 @@ public class OfferService {
         return memberRepository.findById(id)
                 .orElseThrow(() -> new BaseException(INVALID_USER_ID));
     }
+
+//    public CompanyReceivedOfferResDto getCompanyReceivedOfferResDto(Long memberId) throws BaseException {
+//        Member receiver = findMemberById(memberId);
+//        List<Offer> offerList = offerRepository.findByReceiverAndOfferType(receiver, JOB);
+//        offerList.stream().map(
+//                () ->
+//        )
+//    }
 }
