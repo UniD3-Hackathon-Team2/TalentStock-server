@@ -33,7 +33,7 @@ jobs:
         shell: bash
 
       - name: add db connection settings
-        run: echo "${{ secrets.MYSQL_SETTING }}" > /home/runner/work/TalentStock-server/TalentStock-server/unibond/src/main/resources/application-MYSQL.properties
+        run: echo "${{ secrets.MYSQL_SETTING }}" > /home/runner/work/TalentStock-server/TalentStock-server/talent-stock/src/main/resources/application-MYSQL.properties
         shell: bash
 
       - name: Permission for gradlew
