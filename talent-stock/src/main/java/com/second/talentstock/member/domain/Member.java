@@ -2,18 +2,20 @@ package com.second.talentstock.member.domain;
 
 
 import com.second.talentstock.common.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.GenerationType.IDENTITY;
+
+import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
 import static lombok.AccessLevel.PROTECTED;
 
 @Getter
+@Inheritance(strategy = SINGLE_TABLE)
+@DiscriminatorColumn(name = "dtype")
 @NoArgsConstructor(access = PROTECTED)
 @Entity
 public class Member extends BaseEntity {

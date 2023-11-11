@@ -1,6 +1,7 @@
 package com.second.talentstock.offer.domain;
 
 
+
 import com.second.talentstock.member.domain.Member;
 import com.second.talentstock.common.BaseEntity;
 import jakarta.persistence.*;
@@ -25,6 +26,7 @@ public class Offer extends BaseEntity {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+
     @ManyToOne
     @JoinColumn(name="receiver_id")
     private Member receiverId;
@@ -37,10 +39,8 @@ public class Offer extends BaseEntity {
 
     private String content;
 
-    @Enumerated(STRING)
-    private CheckState isChecked;
+    private Boolean isChecked;
 
     @Enumerated(STRING)
     private OfferType offerType;
-
 }
